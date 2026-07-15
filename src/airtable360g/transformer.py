@@ -16,8 +16,19 @@ def transform_table(source, mapping):
     output = pd.DataFrame()
 
     for output_field, rule in mapping.items():
+
         if "from" in rule:
-            output[output_field] = source[rule["from"]]
+            values = source[rule["from"]]
+
+            if rule.get("type") == "number":
+                values = (
+                    values
+                    .str.replace("£", "", regex=False)
+                    .str.replace(",", "", regex=False)
+                    .astype(float)
+                )
+
+            output[output_field] = values
 
         elif "value" in rule:
             output[output_field] = rule["value"]

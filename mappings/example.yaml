@@ -1,14 +1,14 @@
 inputs:
   grants:
-    file: grants.csv
+    file: data/grants.csv
     key: id
 
   geographic_units:
-    file: geographic_units.csv
+    file: samples/geographic_units.csv
     key: code
 
   organisations:
-    file: organisations.csv
+    file: samples/organisations.csv
     key: id
 
 outputs:
@@ -33,6 +33,7 @@ mappings:
 
     amountAwarded:
       from: amount_committed
+      type: number
 
     currency:
       value: GBP
@@ -50,7 +51,7 @@ mappings:
           value: 'East Suffolk Trust'
     recipientOrganization:
       - id:
-          from: recipient_org_id
+          from: recipient_org_identifier
         name:
           from: recipient_org_name
 
