@@ -1,0 +1,51 @@
+inputs:
+  grants:
+    file: grants.csv
+    key: id
+  geographic_units:
+    file: geographic_units.csv
+    key: code
+  organisations:
+    file: organisations.csv
+    key: id
+outputs:
+  grants:
+  beneficiary_locations:
+  fun_locations:
+mappings:
+  grants:
+    id:
+      from: id_360g
+    title:
+      from: title
+    amountAwarded:
+      type: object
+      fields:
+        amount:
+          from: amount_committed
+        currency:
+          value: GBP
+  beneficiary_locations:
+    type: geographic_expansion
+    scope_field: beneficiaries_geographic_scope
+    rules:
+      - when: All of Suffolk
+        create:
+        code: E10000029
+        type: county
+      - when: One or more districts
+        expand_from: beneficiary_districts
+      - when: One or more parishes
+        expand_from: beneficiary_parishes
+  fun_locations:
+      type: geographic_expansion
+      scope_field: nature_geographic_scope
+      rules:
+      - when: All of Suffolk
+        create:
+          code: E10000029
+          type: county
+      - when: One or more districts
+        expand_from: nature_districts
+      - when: One or more parishes
+        expand_from: nature_parishes

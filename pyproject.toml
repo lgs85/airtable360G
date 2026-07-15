@@ -1,0 +1,17 @@
+[project]
+name = "airtable360g"
+version = "0.1.0"
+description = "Convert Airtable grant data to the 360Giving Data Standard using YAML mappings."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "pyyaml",
+]
+
+[project.scripts]
+airtable360g = "airtable360g.main:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
