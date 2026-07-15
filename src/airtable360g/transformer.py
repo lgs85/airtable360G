@@ -1,33 +1,14 @@
 import pandas as pd
 
-
 def transform_table(source, mapping):
     output = pd.DataFrame()
 
     for output_field, rule in mapping.items():
         if "from" in rule:
-            values = source[rule["from"]]
-
-            if "prefix" in rule:
-                values = rule["prefix"] + values.astype(str)
-
-            output[output_field] = values
+            output[output_field] = source[rule["from"]]
 
         elif "value" in rule:
             output[output_field] = rule["value"]
-
-        elif rule.get("type") == "object":
-            output[output_field] = source.apply(
-            lambda row: {
-                key: (
-                    row[field_rule["from"]]
-                    if "from" in field_rule
-                    else field_rule["value"]
-                )
-                for key, field_rule in rule["fields"].items()
-            },
-            axis=1,
-        )
 
     return output
 

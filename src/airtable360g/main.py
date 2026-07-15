@@ -13,26 +13,16 @@ def main():
 
     grants_output = transform_table(
         tables["grants"],
-        config["mappings"]["grants"]
+        config["mappings"]["grant"]
     ).to_dict(orient="records")
 
-
-    locations = expand_geographic_units(
-        tables["grants"],
-        tables["geographic_units"],
-        config["mappings"]["beneficiary_locations"]
-    )
-
-    for grant in grants_output:
-        grant["beneficiaryLocation"] = locations.get(
-            grant["id"],
-            []
-        )
-
+    package = {
+	    "grants": grants_output
+    }
 
     write_json(
-        grants_output,
-        "grants.json"
+	    package,
+	    "grants.json"
     )
 
 if __name__ == "__main__":
