@@ -15,10 +15,19 @@ outputs:
   package: grants.json
 
 mappings:
+  package:
+    license:
+      value: "https://creativecommons.org/licenses/by/4.0/"
+
+    publisher:
+      name:
+        value: "East Suffolk Trust"
+      identifier:
+        value: "360G-EaST"
+
   grant:
     id:
       from: id_360g
-
     title:
       from: title
 
@@ -28,34 +37,20 @@ mappings:
     currency:
       value: GBP
 
-  beneficiaryLocation:
-    type: geographic_expansion
-    scope_field: beneficiaries_geographic_scope
+    awardDate:
+      from: award_date
 
-    rules:
-      - when: All of Suffolk
-        create:
-          code: E10000029
-          type: county
+    description:
+      from: description
 
-      - when: One or more districts
-        expand_from: beneficiary_districts
+    fundingOrganization:
+      - id:
+          value: 'GB-CHC-1213569'
+        name:
+          value: 'East Suffolk Trust'
+    recipientOrganization:
+      - id:
+          from: recipient_org_id
+        name:
+          from: recipient_org_name
 
-      - when: One or more parishes
-        expand_from: beneficiary_parishes
-
-  fundingLocation:
-    type: geographic_expansion
-    scope_field: nature_geographic_scope
-
-    rules:
-      - when: All of Suffolk
-        create:
-          code: E10000029
-          type: county
-
-      - when: One or more districts
-        expand_from: nature_districts
-
-      - when: One or more parishes
-        expand_from: nature_parishes

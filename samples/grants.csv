@@ -1,3 +1,3 @@
-id,id_360g,title,amount_committed,beneficiaries_geographic_scope,beneficiary_districts
-EaST-0018,360G-EaST-0018,Community Centre Grant,5000,One or more districts,E07000240
-EaST-0019,360G-EaST-0019,Youth Project Grant,2500,One or more districts,E07000240
+id,id_360g,recipient_org_name,recipient_org_id,title,description,amount_committed,award_date,beneficiaries_geographic_scope,beneficiary_districts
+EaST-0018,360G-EaST-0018,Suffolk Community Centre,GB-CHC-12345678,Community Centre Grant,An example grant number 1,5000,2026-05-01,One or more districts,E07000240
+EaST-0019,360G-EaST-0019,Suffolk Youth Project,GB-CHC-23456789,Youth Project Grant,An example grant numer 2,2500,2026-07-01,One or more districts,E07000240

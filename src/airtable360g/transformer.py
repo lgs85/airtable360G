@@ -1,5 +1,17 @@
 import pandas as pd
 
+def transform_row_object(mapping, row):
+    output = {}
+
+    for field, rule in mapping.items():
+        if "from" in rule:
+            output[field] = row[rule["from"]]
+
+        elif "value" in rule:
+            output[field] = rule["value"]
+
+    return output
+
 def transform_table(source, mapping):
     output = pd.DataFrame()
 
@@ -9,6 +21,27 @@ def transform_table(source, mapping):
 
         elif "value" in rule:
             output[output_field] = rule["value"]
+
+        elif isinstance(rule, list):
+            output[output_field] = [
+                [
+                    transform_row_object(item, row)
+                    for item in rule
+                ]
+                for _, row in source.iterrows()
+            ]
+
+    return output
+
+def transform_package(mapping):
+    output = {}
+
+    for field, rule in mapping.items():
+        if "value" in rule:
+            output[field] = rule["value"]
+
+        elif isinstance(rule, dict):
+            output[field] = transform_package(rule)
 
     return output
 
